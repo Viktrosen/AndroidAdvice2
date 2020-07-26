@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Android-lesson-1</string>
+    <string name="temperature">Temperature(°C)</string>
+    <string name="cloud">cloudy</string>
+    <string name="city">City</string>
+    <string-array name="cities">
+        <item>Perm</item>
+        <item>Moscow</item>
+        <item>Saint-Petersburg</item>
+    </string-array>
+    <string name="image">Image</string>
+    <string name="settingwind">Wind speed</string>
+    <string name="pressure">Pressure</string>
+    <string name="DarkTheme">Dark theme</string>
+    <string name="settings">Settings</string>
+    <string name="back">Back</string>
+    <string name="info">Info</string>
+    <string-array name="weekdays">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+    <string name="entercity">City</string>
+    <string name="refresh">Refresh</string>
+    <string name="humidity">Humidity</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="developers">О разработчике</string>
+    <string name="linkToDeveloper">Форма обратной связи</string>
+
+
+</resources>
