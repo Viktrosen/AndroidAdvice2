@@ -35,8 +35,9 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="developers">О разработчике</string>
-    <string name="linkToDeveloper">Форма обратной связи</string>
-
+    <string name="developers">Developers</string>
+    <string name="linkToDeveloper">Feedback</string>
+    <string name="history">History</string>
+    <string name="main">Main page</string>
 
 </resources>

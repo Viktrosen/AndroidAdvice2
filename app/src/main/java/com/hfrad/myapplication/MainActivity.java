@@ -12,6 +12,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -118,26 +121,46 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        Fragment fragment = null;
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_slideshow) {
-            // Handle the camera action
-
-        } else if (id == R.id.nav_manage) {
-           /* Intent intent = new Intent(MainActivity.this, SettingActivity.class);
-            startActivity(intent);*/
-            setContentView(R.layout.activity_setting);
-
-        } else if (id == R.id.nav_share) {
-            String url = "https://ru.wikipedia.org/wiki/" + city.getText();
+        if (id == R.id.main) {
+            fragment = new MainFragment();
+        }else if (id == R.id.history) {
+            fragment = new HistoryFragment();
+        } else if (id == R.id.setting) {
+            fragment = new SettingFragment();
+        } else if (id == R.id.info) {
+            String url = null;
+            if (city.getText()!=null){
+            url = "https://ru.wikipedia.org/wiki/" + city.getText();}
+            else {
+                url = "https://ru.wikipedia.org/wiki/Moscow";
+            }
             Uri uri = Uri.parse(url);
             Intent browser = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(browser);
+        } else if (id == R.id.developers) {
+            // TODO: 29.07.2020
         }
+        else if (id == R.id.linkToDeveloper) {
+            // TODO: 29.07.2020
+        }
+
+        // Вставляем фрагмент, заменяя текущий фрагмент
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.container,fragment).commit();
+        // Выделяем выбранный пункт меню в шторке
+        item.setChecked(true);
+        // Выводим выбранный пункт в заголовке
+        setTitle(item.getTitle());
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+
+
     }
 }
