@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity
     private static final String WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather?q=Moscow,RU&appid=";
     private static final String WEATHER_API_KEY = "f08d91ee6d0e41fc37b2b993e4e93faa";
 
+    static int getTemp = 0;
+    static String getCity = "";
     private EditText city;
     private EditText temperature;
     private EditText pressure;

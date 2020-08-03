@@ -4,15 +4,22 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.lang.reflect.Field;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,33 +35,34 @@ public class SettingFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_setting, container,
                 false);
         Button backButton = rootView.findViewById(R.id.button2);
+        final Spinner spinner = rootView.findViewById(R.id.spinner2);
+        final EditText cityInput = (EditText)getActivity().findViewById(R.id.enterCity);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Хотите покинуть настройки?", Snackbar.LENGTH_LONG).setAction("Да", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
                         int temperature = (int) (Math.random() * 20);
-                        Spinner spinner = rootView.findViewById(R.id.button2);
-                        TextInputEditText cityInput = rootView.findViewById(R.id.enterCity);
-
                         String city = "";
-                        if (String.valueOf(cityInput.getText()).equals("")) {
-                            city = String.valueOf(spinner.getSelectedItem());
-                        } else {
-                            city = String.valueOf(cityInput.getText());
-                        }
 
-                       Intent intent = new Intent("com.hfrad.myapplication.MainFragment");
-                        intent.putExtra("City", city);
-                        startActivity(intent);
-                    }
-                }).show();
+                try {
+                    Field field =  MainActivity.class.getDeclaredField("getCity");
+                    field.set(this,(String)spinner.getSelectedItem());
+                } catch (NoSuchFieldException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+
+
+
+
+
+
+                Fragment fragment = new MainFragment();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.container,fragment).commit();
+
+
             }
         });
-
-
         return rootView;
     }
 }

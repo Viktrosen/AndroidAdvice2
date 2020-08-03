@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -62,8 +63,6 @@ public class MainFragment extends Fragment {
         humidity = rootView.findViewById(R.id.textHumidity);
         windSpeed = rootView.findViewById(R.id.textWindspeed);
         Button refresh = rootView.findViewById(R.id.refresh);
-        Button settings = rootView.findViewById(R.id.button);
-
         Button info = rootView.findViewById(R.id.button3);
         info.setOnClickListener(infoListener);
         refresh.setOnClickListener(clickListener);
@@ -86,15 +85,9 @@ public class MainFragment extends Fragment {
         @Override
         public void onClick(final View v) {
             try {
-                Intent intent = new Intent("com.hfrad.myapplication.MainFragment");
-                Bundle bundle = intent.getExtras();
-                if (bundle == null) {
-                    return;
-                }
                 final URL uri;
-                String city = bundle.getString("City");
-                if (city!=null) {
-                    uri = new URL("https://api.openweathermap.org/data/2.5/weather?q=" + city + ",RU&appid=" + WEATHER_API_KEY);
+                if (MainActivity.getCity!=null) {
+                    uri = new URL("https://api.openweathermap.org/data/2.5/weather?q=" + MainActivity.getCity + ",RU&appid=" + WEATHER_API_KEY);
                 } else {
                     uri = new URL(WEATHER_URL + WEATHER_API_KEY);
                 }
