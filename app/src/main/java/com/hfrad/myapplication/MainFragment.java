@@ -52,7 +52,7 @@ public class MainFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_main, container,
                 false);
         init(rootView);
-
+        initShow(rootView);
         return rootView;
     }
 
@@ -62,10 +62,10 @@ public class MainFragment extends Fragment {
         pressure = rootView.findViewById(R.id.textPressure);
         humidity = rootView.findViewById(R.id.textHumidity);
         windSpeed = rootView.findViewById(R.id.textWindspeed);
-        Button refresh = rootView.findViewById(R.id.refresh);
+
         Button info = rootView.findViewById(R.id.button3);
         info.setOnClickListener(infoListener);
-        refresh.setOnClickListener(clickListener);
+
     }
 
     View.OnClickListener infoListener = new View.OnClickListener() {
@@ -81,10 +81,9 @@ public class MainFragment extends Fragment {
 
 
 
-    View.OnClickListener clickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(final View v) {
-            try {
+    private void initShow(View v){
+
+        try {
                 final URL uri;
                 if (MainActivity.getCity!=null) {
                     uri = new URL("https://api.openweathermap.org/data/2.5/weather?q=" + MainActivity.getCity + ",RU&appid=" + WEATHER_API_KEY);
@@ -147,12 +146,13 @@ public class MainFragment extends Fragment {
 
         private void displayWeather(WeatherRequest weatherRequest) {
             city.setText(weatherRequest.getName());
-            temperature.setText(String.format("%f2", weatherRequest.getMain().getTemp() - 273));
+            temperature.setText(String.format("%f2", weatherRequest.getMain().getTemp() - 273.15f));
             pressure.setText(String.format("%d", weatherRequest.getMain().getPressure()));
             humidity.setText(String.format("%d", weatherRequest.getMain().getHumidity()));
             windSpeed.setText(String.format("%d", weatherRequest.getWind().getSpeed()));
         }
-    };
+
+
 
 
 }

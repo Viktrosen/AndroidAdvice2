@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity
         pressure = findViewById(R.id.textPressure);
         humidity = findViewById(R.id.textHumidity);
         windSpeed = findViewById(R.id.textWindspeed);
-        Button refresh = findViewById(R.id.refresh);
+
         Button settings = findViewById(R.id.button);
         //settings.setOnClickListener(settingsActivity);
         Button info = findViewById(R.id.button3);
@@ -135,15 +135,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.setting) {
             fragment = new SettingFragment();
         } else if (id == R.id.info) {
-            String url = null;
-            if (city.getText()!=null){
-            url = "https://ru.wikipedia.org/wiki/" + city.getText();}
-            else {
-                url = "https://ru.wikipedia.org/wiki/Moscow";
-            }
-            Uri uri = Uri.parse(url);
-            Intent browser = new Intent(Intent.ACTION_VIEW, uri);
-            startActivity(browser);
+            fragment = new InfoFragment();
         } else if (id == R.id.developers) {
             // TODO: 29.07.2020
         }

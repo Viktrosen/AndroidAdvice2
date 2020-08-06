@@ -1,8 +1,10 @@
 package com.hfrad.myapplication;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -36,9 +38,10 @@ public class SettingFragment extends Fragment {
                 false);
         Button backButton = rootView.findViewById(R.id.button2);
         final Spinner spinner = rootView.findViewById(R.id.spinner2);
-        final EditText cityInput = (EditText)getActivity().findViewById(R.id.enterCity);
+        final EditText cityInput = (EditText) Objects.requireNonNull(getActivity()).findViewById(R.id.enterCity);
 
         backButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                         int temperature = (int) (Math.random() * 20);
@@ -51,16 +54,9 @@ public class SettingFragment extends Fragment {
                     e.printStackTrace();
                 }
 
-
-
-
-
-
                 Fragment fragment = new MainFragment();
-                FragmentManager fragmentManager = getFragmentManager();
+                FragmentManager fragmentManager = getParentFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.container,fragment).commit();
-
-
             }
         });
         return rootView;
