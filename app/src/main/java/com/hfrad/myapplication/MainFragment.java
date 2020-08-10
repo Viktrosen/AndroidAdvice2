@@ -28,11 +28,7 @@ import java.util.stream.Collectors;
 
 import javax.net.ssl.HttpsURLConnection;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the  factory method to
- * create an instance of this fragment.
- */
+
 public class MainFragment extends Fragment {
 
     private static final String TAG = "WEATHER";
@@ -94,6 +90,7 @@ public class MainFragment extends Fragment {
                 new Thread(new Runnable() {
                     public void run() {
                         HttpsURLConnection urlConnection = null;
+
                         try {
                             urlConnection = (HttpsURLConnection) uri.openConnection();
                             urlConnection.setRequestMethod("GET"); // установка метода получения данных -GET

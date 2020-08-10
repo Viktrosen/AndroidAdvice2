@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 
+import java.util.Objects;
+
 public class InfoFragment extends Fragment {
 
 
@@ -17,7 +19,7 @@ public class InfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final WebView page = getActivity().findViewById(R.id.page);
+        final WebView page = Objects.requireNonNull(getActivity()).findViewById(R.id.page);
 
         OkHttpRequester requester;
         requester = new OkHttpRequester(new OkHttpRequester.OnResponseCompleted() {
@@ -28,8 +30,8 @@ public class InfoFragment extends Fragment {
             }
         });
         // Запускаем запрос
-        requester.run("https://geekbrains.ru"); // Загружаем страницу
-        // Inflate the layout for this fragment
+        requester.run("https://https://ru.wikipedia.org/wiki/Пермь"); // Загружаем страницу
+
         return inflater.inflate(R.layout.fragment_info, container, false);
 
     }
