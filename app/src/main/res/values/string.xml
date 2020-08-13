@@ -39,5 +39,6 @@
     <string name="linkToDeveloper">Feedback</string>
     <string name="history">History</string>
     <string name="main">Main page</string>
+    <string name="searchCity">Search city</string>
 
 </resources>

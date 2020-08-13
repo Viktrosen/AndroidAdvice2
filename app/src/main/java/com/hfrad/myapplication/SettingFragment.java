@@ -1,5 +1,8 @@
 package com.hfrad.myapplication;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +28,14 @@ import androidx.fragment.app.FragmentManager;
 
 
 public class SettingFragment extends Fragment {
+    private static final String TAG = "SettingFragment";
+    private static final String ACTION_SEND_MSG = "com.hfrad.myapplication.message";
+    // Имя передаваемого параметра
+    private static final String NAME_MSG = "MSG";
+    // Эта константа спрятана в Intent классе,
+    // но именно при помощи ее можно поднять приложение
+    public static final int FLAG_RECEIVER_INCLUDE_BACKGROUND = 0x01000000;
+
     List<String> cityNames = new ArrayList<>();
     CitiesDao educationDao = App
             .getInstance()
@@ -60,9 +71,9 @@ public class SettingFragment extends Fragment {
         spinner.setAdapter(adapter);
 
 
-
         backButton.setOnClickListener(new View.OnClickListener() {
 
+            @SuppressLint("WrongConstant")
             @Override
             public void onClick(View view) {
 
@@ -86,6 +97,25 @@ public class SettingFragment extends Fragment {
                 Fragment fragment = new MainFragment();
                 FragmentManager fragmentManager = getParentFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.container,fragment).commit();
+
+                Intent intent = new Intent(Intent.ACTION_BATTERY_CHANGED);
+                int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+                int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 100);
+                Log.i(TAG, "level: " + level + "; scale: " + scale);
+                int percent = (level*100)/scale;
+
+                final String text = String.valueOf(percent) + "%";
+
+                // Укажем ACTION по которому будем ловить сообщение
+                intent.setAction(ACTION_SEND_MSG);
+                // Добавим параметр.
+                intent.putExtra(NAME_MSG, text);
+                // Указываем флаг поднятия приложения
+                // (без него будут получать уведомления только
+                // загруженные приложения)
+                //intent.addFlags(FLAG_RECEIVER_INCLUDE_BACKGROUND);
+                // Отправка сообщения
+                Objects.requireNonNull(getActivity()).sendBroadcast(intent);
             }
         });
         return rootView;

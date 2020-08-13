@@ -52,6 +52,8 @@ public class MainFragment extends Fragment {
         return rootView;
     }
 
+
+
     private void init(View rootView) {
         city = rootView.findViewById(R.id.textCity);
         temperature = rootView.findViewById(R.id.textTemprature);

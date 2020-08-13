@@ -39,4 +39,5 @@
     <string name="linkToDeveloper">Обратная связь</string>
     <string name="history">История</string>
     <string name="main">Главная</string>
+    <string name="searchCity">Поиск города</string>
 </resources>
