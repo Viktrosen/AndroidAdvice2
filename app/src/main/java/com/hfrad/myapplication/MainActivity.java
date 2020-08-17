@@ -5,11 +5,14 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -50,6 +53,8 @@ public class MainActivity extends AppCompatActivity
 
 
     static String getCity = "";
+    static int latitude = 0;
+    static int longitude = 0;
 
 
     @Override
@@ -220,4 +225,6 @@ public class MainActivity extends AppCompatActivity
         editor.putString("City",getCity);
         editor.commit();
     }
+
+
 }
